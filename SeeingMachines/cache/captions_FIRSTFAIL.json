@@ -2594,20 +2594,8 @@
     "confidence_notes": "The presence of projectiles and target indicators suggests a military or strategic game."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/1522/screenshots/2012-07-04_00001.jpg": {
-    "scene_type": "map_screen",
-    "visible_elements": [
-      "world map",
-      "blue glowing lines",
-      "green dots",
-      "pink circle",
-      "small icons",
-      "cursor",
-      "menu buttons"
-    ],
-    "setting_description": "A large, stylized world map is displayed, with glowing lines connecting various locations. Small, colored dots and icons indicate points of interest or activity.",
-    "visible_text": "Game status and control options displayed",
-    "guessed_genre_or_title": "Strategic world management",
-    "confidence_notes": "The glowing lines and dots suggest a strategic or simulation-based game."
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"map_screen\",\n  \"visible_elements\": [\n    \"world map\",\n    \"blue planet\",\n    \"green dots\",\n    \"yellow dots\",\n    \"pink circle\",\n    \"white circle\",\n    \"cursor\",\n    \"icons\",\n    \"UI panel\",\n    \"text labels\"\n  ],\n  \"setting_description\": \"A large, stylized world map is displayed, with numerous glowing points indicating locations of entities or objectives. A cursor is positioned on the map, likely indicating a selection or targeting point.\",\n  \"visible_text\": \"DEFOP, SESSION 01-v05, 01:05:58, player1.health 100, player2.health 100, player3.health 100, player4.health 100, player5.health 100, player6.health 100, player7.health 100, player8.health 100, player9.health 100, player10.health 100, player11.health 100, player12.health 100, player13.health 100, player14.health 100, player15.health 100,"
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/1522/screenshots/2012-07-04_00003.jpg": {
     "scene_type": "map_screen",
@@ -3870,20 +3858,8 @@
     "confidence_notes": "The scale of the building and the intensity of the fire suggest a large-scale destruction event."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/244850/screenshots/2015-07-09_00007.jpg": {
-    "scene_type": "exploration",
-    "visible_elements": [
-      "small ship",
-      "large ship",
-      "stars",
-      "dark space",
-      "control panel",
-      "indicator",
-      "numbers"
-    ],
-    "setting_description": "A small ship is moving through a dark, expansive space filled with stars and debris, approaching a larger ship.",
-    "visible_text": "Ship stats and energy levels displayed",
-    "guessed_genre_or_title": "Space exploration simulator",
-    "confidence_notes": "The large ship appears to be a significant threat or objective."
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"exploration\",\n  \"visible_elements\": [\n    \"large ship\",\n    \"small ship\",\n    \"jump point\",\n    \"dark space\",\n    \"control panel\",\n    \"status display\"\n  ],\n  \"setting_description\": \"The scene depicts a vast, dark expanse of space with a large ship and a smaller ship positioned near a prominent jump point, suggesting a journey or exploration.\",\n  \"visible_text\": \"Oxygen: High\\nGravity: 1.0 g\\nStanding helmet Off\\nHealth: 100\\nJetpack: Off\\nJumppack: Off\\nPower Usage: 200.00\\nReactor: 200.00\\nSpeed: 3.0\\nEnergy: 100.0\\nVolume: 164.4\\nFuel: 33\\nRadio: 200\\nNo Spotlights\\n2 (207-298 kg)\\nMove Base: 0.0\\nPower: 200.0\\nThusters: 34\\nDampeners: 6\\nGyroscope: 10\\nFuel Timer: 33 min\\nNumber of batteries: 4\\nIn proximity: 0\",\n  \"guessed"
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/244850/screenshots/2015-07-09_00004.jpg": {
     "scene_type": "map_screen",
@@ -3919,20 +3895,8 @@
     "confidence_notes": "The astronaut's suit and the presence of a control panel suggest a space-based setting."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/244850/screenshots/2015-07-09_00001.jpg": {
-    "scene_type": "exploration",
-    "visible_elements": [
-      "small spaceship",
-      "large spaceship",
-      "control panel",
-      "helmet",
-      "stars",
-      "moon",
-      "text display"
-    ],
-    "setting_description": "A spaceship is orbiting a large planet, with a control panel visible in the foreground.",
-    "visible_text": "Ship stats and fuel levels displayed",
-    "guessed_genre_or_title": "Space exploration simulator",
-    "confidence_notes": "The specific type of ship and planet are unclear."
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"exploration\",\n  \"visible_elements\": [\n    \"small spaceship\",\n    \"large spaceship\",\n    \"distant planet\",\n    \"white star\",\n    \"control panel\",\n    \"blue cursor\",\n    \"text display\"\n  ],\n  \"setting_description\": \"A small spaceship is orbiting a large spaceship near a distant planet in a dark, starry space environment.\",\n  \"visible_text\": \"Cobalt mine 16.668m\\nBase 17cm\\nOxygen High\\nGravity 1.0 e\\nStanding helmet OFF\\nStanding headset OFF\\nHealth: OFF\\nJetpack: OFF\\nSampson: OFF\\nLights: OFF\\nVolume: 125.1\\nSpeed: 3.0 m/s\\nEnergy: 100.0\\nOxygen: 6.5 e\\nRadio: 200\\nNo Spotlights\\nNames: 2.562, 774 kg\\nSpeed: 0.0 m/s\\nPower User: 4, 39 k\\nReactors: 200.00 m/s\\nThusters: 34\\nDampeners: ON\\nGunscopes: 10\\nFuel Timer"
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/244850/screenshots/2015-07-09_00003.jpg": {
     "scene_type": "map_screen",
@@ -4887,19 +4851,8 @@
     "confidence_notes": "The presence of soldiers and a monitor suggests a tactical or strategic game."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/287700/screenshots/2015-09-10_00001.jpg": {
-    "scene_type": "menu_ui",
-    "visible_elements": [
-      "score display",
-      "play rating statistics",
-      "bond level indicator",
-      "code name display",
-      "quest icon",
-      "navigation buttons"
-    ],
-    "setting_description": "A dark interface displays a score summary and various gameplay statistics, likely after completing a mission.",
-    "visible_text": "Score summary and gameplay statistics",
-    "guessed_genre_or_title": "Stealth operation simulation",
-    "confidence_notes": "The title 'Footprints of Phantoms' suggests a stealth-based game."
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"menu_ui\",\n  \"visible_elements\": [\n    \"black background\",\n    \"white text\",\n    \"score display\",\n    \"character icon\",\n    \"UI buttons\",\n    \"progress bar\",\n    \"game title\"\n  ],\n  \"setting_description\": \"The screenshot displays a game score screen with various statistics and a character profile, set against a dark, abstract background.\",\n  \"visible_text\": \"Episode 36: [TOTAL STEALTH] FOOTPRINTS OF PHANTOMS\\nPLAY RATING\\nTOTAL PLAY TIME 44:28:12:134\\nTIME 10:44.830\\nENEMY COMBAT ALERTS 0\\nHITS TAKEN 0\\nTACTICAL TAKEDOWNS 2\\nHEADSHOTS 2\\nACCURACY 50.00%(3/6)\\nNEUTRALIZATIONS 10\\nMARKINGS 30\\neffective interrogations 4\\nprisoners rescued 1\\nTOTAL 126231\\nSCORE 21000\\n147231\",\n  \"guessed_genre_or_title\": \"stealth action\",\n  \"confidence_notes\": \"The title suggests a stealth-based game, likely"
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/287700/screenshots/2015-09-09_00003.jpg": {
     "scene_type": "exploration",
@@ -6502,7 +6455,7 @@
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/4000/screenshots/2012-03-30_00001.jpg": {
     "parse_error": true,
-    "raw_text": "```json\n{\n  \"scene_type\": \"combat\",\n  \"visible_elements\": [\n    \"silhouette figure\",\n    \"shotgun\",\n    “machine gun”,\n    “brick pavement”,\n    “green field”,\n    “health bar”,\n    “score display”\n  ],\n  \"setting_description\": \"A figure stands on a brick surface, holding a shotgun, facing a machine gun, with a distant green field.\",\n  \"visible_text\": \"Health and score displayed\",\n  \"guessed_genre_or_title\": \"Military shooter\",\n  \"confidence_notes\": \"The figure's silhouette suggests a combat scenario.\"\n}\n```"
+    "raw_text": "```json\n{\n  \"scene_type\": \"combat\",\n  \"visible_elements\": [\n    \"silhouette figure\",\n    \"shotgun\",\n    “machine gun”,\n    “brick pavement”,\n    “green field”,\n    “health bar”,\n    “ammo counter”\n  ],\n  \"setting_description\": \"A figure is positioned on a brick surface, seemingly preparing to fire a weapon, with a vast green field extending into the background.\",\n  \"visible_text\": \"2000 255 200 256\",\n  \"guessed_genre_or_title\": \"military shooter\",\n  \"confidence_notes\": \"The silhouette and weaponry suggest a combat scenario.\"\n}\n```"
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/4000/screenshots/2012-04-14_00001.jpg": {
     "scene_type": "exploration",
@@ -6521,17 +6474,8 @@
     "confidence_notes": "The vehicle's design and the presence of the weapon suggest a combat-oriented environment."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/4000/screenshots/2012-03-10_00002.jpg": {
-    "scene_type": "cutscene_dialogue",
-    "visible_elements": [
-      "man",
-      "dark figure",
-      "floor",
-      "text display"
-    ],
-    "setting_description": "A man stands in a dimly lit room, facing a dark, indistinct figure. A bright light illuminates the floor.",
-    "visible_text": "Health 66, command 86 1.5. Fudget(VM) - omen yes, stupid",
-    "guessed_genre_or_title": "dark mystery",
-    "confidence_notes": "The text is difficult to decipher, and the nature of the dark figure is unclear."
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"combat\",\n  \"visible_elements\": [\n    \"man\",\n    \"dark figure\",\n    \"circular light\",\n    \"stone floor\",\n    \"text display\"\n  ],\n  \"setting_description\": \"A man stands in a dimly lit area, illuminated by a bright circle on the ground. A dark figure is partially obscured in the shadows.\",\n  \"visible_text\": \"commando 86 1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6.1.6."
   },
   "/content/SeeingMachines/SeeingMachines/screenshots/4000/screenshots/2012-12-28_00002.jpg": {
     "scene_type": "exploration",

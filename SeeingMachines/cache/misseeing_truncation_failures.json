@@ -1,0 +1,6 @@
+{
+  "/content/SeeingMachines/SeeingMachines/screenshots/4000/screenshots/2012-03-30_00001.jpg": {
+    "parse_error": true,
+    "raw_text": "```json\n{\n  \"scene_type\": \"combat\",\n  \"visible_elements\": [\n    \"silhouette figure\",\n    \"shotgun\",\n    “machine gun”,\n    “brick pavement”,\n    “green field”,\n    “health bar”,\n    “score display”\n  ],\n  \"setting_description\": \"A figure stands on a brick surface, holding a shotgun, facing a machine gun, with a distant green field.\",\n  \"visible_text\": \"Health and score displayed\",\n  \"guessed_genre_or_title\": \"Military shooter\",\n  \"confidence_notes\": \"The figure's silhouette suggests a combat scenario.\"\n}\n```"
+  }
+}

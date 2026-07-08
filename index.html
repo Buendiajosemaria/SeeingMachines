@@ -375,14 +375,14 @@ player15.health 100,<span class="bad">&#9608; [cut]</span></div>
   <div class="wrap">
     <div class="sec-label">Results</div>
     <h2>Evaluation report</h2>
-    <p>Two benchmarks, both measuring precision@5: of each route's top five results, how many are actually correct. The routes are CLIP-only (Level 1), caption-only (Level 2), and hybrid fusion at &#945;=0.5 (Level 3).</p>
+    <p>Two benchmarks, two metrics, chosen to fit their gold sets. The game-identity benchmark reports precision@5, which is fair there because every query has at least five correct answers and a perfect route can score 1.0. The hand-labeled benchmark reports hit@5 instead: most of its queries have exactly one correct answer, which caps precision@5 at 0.2 and makes perfect retrievals look like failures, a mistake I made on the first scoring pass and corrected. The routes are CLIP-only (Level 1), caption-only (Level 2), and hybrid fusion at α=0.5 (Level 3).</p>
 
     <h3>Benchmark 1: game identity, labeled by the folder structure</h3>
     <p>Queries are game names, and the correct answers are by definition the files inside that game's own App ID folder. Neither retrieval route ever saw those labels, so this is a fair fight, and it is one where I could predict the outcome in advance: the caption route should lose badly, because game titles were deliberately withheld from the captioner, while CLIP has seen most of these games captioned all over the web.</p>
     <!-- Run the game-identity eval cell and paste the real means here.
          evaluation_gameid.csv has the per-query table if you want to include highlights. -->
     <table>
-      <thead><tr><th>Route</th><th>Mean p@5</th><th>Predicted</th></tr></thead>
+      <thead><tr><th>Route</th><th>HIT RATE @5</th><th>Predicted</th></tr></thead>
       <tbody>
         <tr><td>Level 1 (CLIP)</td><td class="num">0.57</td><td>high</td></tr>
         <tr><td>Level 2 (captions)</td><td class="num">0.12</td><td>low, by design</td></tr>
@@ -391,11 +391,11 @@ player15.health 100,<span class="bad">&#9608; [cut]</span></div>
     </table>
 
     <h3>Benchmark 2: semantic queries, pooled judgment</h3>
-    <p>Ten semantic queries ("a dog or wolf", "snowy landscape", "an inventory menu", and deliberately, "a fish"). For each query I judged the pooled union of all three routes' top five results, marking which retrieved images were actually relevant. This is standard pooling from information retrieval: it measures precision honestly while only requiring me to judge what was retrieved, around fifteen images per query, rather than hand-labeling 470.</p>
+    <p>Ten semantic queries ("a dog or wolf", "snowy landscape", "an inventory menu", and deliberately, "a fish"). For each query I judged the pooled union of all three routes' top five results, marking which retrieved images were actually relevant. Ten semantic queries ("a dog or wolf", "snowy landscape", "an inventory menu", and deliberately, "a fish"), scored as hit@5: did the route place a correct image in its top five. I judged the pooled union of all three routes' results, marking which retrieved images were actually relevant. This is standard pooling from information retrieval: it measures honestly while only requiring me to judge what was retrieved, around fifteen images per query, rather than hand-labeling 470. pooling from information retrieval: it measures precision honestly while only requiring me to judge what was retrieved, around fifteen images per query, rather than hand-labeling 470.</p>
     <!-- Run the pooled eval cells, fill in JUDGMENTS, and paste the means here.
          evaluation_pooled.csv has the per-query breakdown. -->
     <table>
-      <thead><tr><th>Route</th><th>Mean p@5</th></tr></thead>
+      <thead><tr><th>Route</th><th>HIT RATE @5</th></tr></thead>
       <tbody>
         <tr><td>Level 1 (CLIP)</td><td class="num">0.44</td></tr>
         <tr><td>Level 2 (captions)</td><td class="num">0.39</td></tr>

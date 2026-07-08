@@ -1,0 +1,21 @@
+query,n_gold,p@5 CLIP,p@5 caption,p@5 hybrid
+lightsaber duel,1,0.2,0.2,0.2
+a sports car,2,0.0,0.2,0.0
+a group picture,1,0.0,0.0,0.0
+a game bug,2,0.0,0.0,0.0
+a movie reference,1,0.0,0.0,0.0
+a medieval knight,1,0.2,0.0,0.2
+a portrait,1,0.0,0.0,0.0
+a dog,1,0.0,0.2,0.2
+snowy landscape,2,0.0,0.0,0.0
+a futuristic city,1,0.2,0.2,0.2
+a panoramic view,1,0.0,0.0,0.0
+golden hour,1,0.2,0.0,0.0
+balloons,1,0.0,0.0,0.0
+planet earth,1,0.2,0.2,0.2
+a scoreboard,1,0.2,0.0,0.0
+an inventory menu,1,0.2,0.2,0.2
+a main menu,1,0.0,0.0,0.0
+a management menu,1,0.0,0.2,0.2
+a fish,0,,,
+nudity,0,,,

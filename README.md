@@ -56,21 +56,29 @@ routes still work from cache and only the generated answers are unavailable.
 
 ```
 SeeingMachines/
-  ORTEGA_seeing_machines_companion.ipynb   the notebook
+  index.html                                 project documentation page (GitHub Pages)
+  README.md                                  this file
+  images/                                    figures for the documentation page
   SeeingMachines/
+    index.html                               documentation page (Netlify mirror)
+    images/                                  same figures, mirror copy
+    root_file_list.txt                       the original App ID list
+    blob/
+      main/
+        ORTEGA_seeing_machines_companion_008.ipynb   the notebook (current)
+      old/
+        ORTEGA_*_001..007.ipynb              earlier notebook versions, kept as process history
     cache/
-      appid_to_name.json                   App ID to game name mapping
-      clip_embeddings.npy                  Level 1 image embeddings
-      clip_embeddings_index.csv            row index for the embeddings
-      captions.json                        Level 2 VLM descriptions (470 images)
-      caption_embeddings_st.npy            Level 2 caption embeddings
-      misseeing_truncation_failures.json   archived caption failures, kept as evidence
-      evaluation_results.csv               hand-labeled benchmark results
-      evaluation_gameid.csv                game-identity benchmark results
+      appid_to_name.json                     App ID to game name mapping
+      captions.json                          Level 2 VLM descriptions (470 images, current)
+      captions_FIRSTFAIL.json                the 69% truncation run, kept as evidence
+      captions_OLD.json                      pre-fix caption run, kept as evidence
+      clip_embeddings.npy                    Level 1 image embeddings
+      clip_embeddings_index.csv              row index for the embeddings
+      corpus_index.csv                       scanned corpus index
+      misseeing_truncation_failures.json     archived caption failures (dossier raw material)
     screenshots/
-      <appid>/screenshots/*.jpg            the image corpus, organized by Steam App ID
-  index.html                               project documentation page
-  images/                                  figures for the documentation page
+      <appid>/screenshots/*.jpg              the image corpus, organized by Steam App ID
 ```
 
 ## On the screenshots

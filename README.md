@@ -10,9 +10,13 @@ TH Nürnberg, Summer 2026. Submitted at **Level 3 (The Critic)**.
 
 **Full documentation:** https://github.com/Buendiajosemaria/SeeingMachines/tree/main
 
+**Github Pages Link:** https://buendiajosemaria.github.io/SeeingMachines/ 
+
 **Netlify Mirror** https://seeingmachines.netlify.app/
 
 **Google Drive to the Notebook** https://drive.google.com/file/d/1Os8bx9-f1QO8Q7Hqx4jLLS2RpIgDR15q/view?usp=drive_link
+
+**The Claude AI Conversation that made this project possible:** https://claude.ai/share/b6a1e094-2d5a-498f-8893-a57ee2efaa6c
 
 ## What it does
 

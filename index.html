@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seeing Machines: Screenshot Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #171d25;
+    --panel: #1f2937;
+    --panel-2: #232f3f;
+    --line: #33415380;
+    --text: #dde5ee;
+    --muted: #8fa0b3;
+    --accent: #6fb7e8;
+    --hud: #e8c15a;
+    --fail: #d98a7a;
+    --mono: "IBM Plex Mono", monospace;
+    --serif: "Source Serif 4", Georgia, serif;
+    --disp: "Space Grotesk", system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 1.06rem;
+    line-height: 1.72;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero { padding: 84px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-family: var(--mono); font-size: .78rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--disp); font-weight: 700; font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    line-height: 1.08; letter-spacing: -0.015em; margin-bottom: 14px;
+  }
+  h1 .thin { color: var(--accent); font-weight: 500; }
+  .tagline { font-size: 1.22rem; font-style: italic; color: var(--muted); margin-bottom: 28px; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 10px 28px;
+    font-family: var(--mono); font-size: .85rem; color: var(--muted);
+  }
+  .meta b { color: var(--text); font-weight: 500; }
+  .links { margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .links a {
+    font-family: var(--disp); font-size: .9rem; font-weight: 500;
+    color: var(--bg); background: var(--accent); text-decoration: none;
+    padding: 8px 18px; border-radius: 4px;
+  }
+  .links a.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .links a:focus-visible { outline: 2px solid var(--hud); outline-offset: 2px; }
+
+  section { padding: 52px 0 8px; }
+  h2 {
+    font-family: var(--disp); font-weight: 700; font-size: 1.55rem;
+    letter-spacing: -0.01em; margin-bottom: 6px;
+  }
+  .sec-label {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  h3 { font-family: var(--disp); font-weight: 500; font-size: 1.15rem; margin: 28px 0 8px; }
+  p { margin-bottom: 16px; }
+  p.lead { font-size: 1.14rem; }
+  a { color: var(--accent); }
+  ul { margin: 0 0 16px 22px; }
+  li { margin-bottom: 6px; }
+  code, .mono { font-family: var(--mono); font-size: .88em; color: var(--hud); }
+
+  figure { margin: 26px 0 30px; }
+  figure img {
+    width: 100%; border-radius: 6px; border: 1px solid var(--line); display: block;
+  }
+  figcaption {
+    font-family: var(--mono); font-size: .8rem; color: var(--muted);
+    margin-top: 10px; line-height: 1.55;
+  }
+  figcaption b { color: var(--text); font-weight: 500; }
+  .fig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .fig-row { grid-template-columns: 1fr; } }
+
+  /* dossier cards: the signature element */
+  .case {
+    background: var(--panel); border: 1px solid var(--line);
+    border-left: 3px solid var(--fail); border-radius: 6px;
+    padding: 26px 28px; margin: 26px 0;
+  }
+  .case.ok { border-left-color: var(--accent); }
+  .case-id {
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .12em;
+    color: var(--fail); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .case.ok .case-id { color: var(--accent); }
+  .case h3 { margin: 0 0 10px; }
+  .evidence {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
+    font-family: var(--mono); font-size: .8rem; line-height: 1.6;
+    color: var(--text); padding: 16px 18px; margin: 14px 0;
+    white-space: pre-wrap; overflow-x: auto;
+  }
+  .evidence .bad { color: var(--fail); }
+  .evidence .dim { color: var(--muted); }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 20px 0 28px;
+    font-family: var(--mono); font-size: .84rem;
+  }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: .72rem; letter-spacing: .1em; }
+  td.num { color: var(--hud); }
+
+  .pipeline { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; margin: 26px 0; }
+  .pipeline svg { width: 100%; height: auto; display: block; }
+
+  footer {
+    margin-top: 70px; padding: 34px 0 60px; border-top: 1px solid var(--line);
+    font-family: var(--mono); font-size: .8rem; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CompSci for Designers 2 &middot; Final Project</div>
+    <h1>Seeing Machines: <span class="thin">Screenshot Companion</span></h1>
+    <p class="tagline">470 screenshots, 72 games, and a machine that tells me what it thinks it saw.</p>
+    <div class="meta">
+      <span><b>José María Ortega</b></span>
+      <span>Level: <b>3 (The Critic)</b></span>
+      <span>MA Design for Digital Futures</span>
+      <span>TH Nürnberg &middot; Summer 2026</span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/Buendiajosemaria/SeeingMachines">Code &amp; caches</a>
+      <a class="ghost" href="https://drive.google.com/file/d/1Os8bx9-f1QO8Q7Hqx4jLLS2RpIgDR15q/view?usp=sharing">Colab notebook</a>
+    </div>
+  </div>
+</header>
+
+<!-- TEASER: export your best "Both side-by-side" interface shot (the SWORDFIGHTING one
+     works well: lightsabers on the caption side, chaos on the CLIP side) as images/teaser.png -->
+<section>
+  <div class="wrap">
+    <figure>
+      <img src="images/teaser.png" alt="The Screenshot Companion interface answering the query SWORDFIGHTING, with CLIP results and caption results side by side">
+      <figcaption><b>The Companion in use.</b> One query, two ways of seeing. CLIP retrieval on the left ranks by what the frame looks like as a whole. Caption retrieval on the right ranks by what a vision-language model wrote down about each image. They disagree often, and the disagreements are the interesting part.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="wrap">
+    <div class="sec-label">Abstract</div>
+    <h2>What this is</h2>
+    <p class="lead">The Screenshot Companion is a multimodal retrieval system built over my personal Steam screenshot archive: 470 images collected across 72 games and roughly fourteen years of playing. It answers questions like "pull up all screenshots from Cyberpunk 2077", "show me a nighttime city street", or "what game is this from?".</p>
+    <p>The system runs three retrieval routes over the same corpus. Level 1 embeds every image with CLIP and searches by visual similarity. Level 2 has Gemma 3 4B write a structured JSON description of every screenshot, embeds those descriptions as text, and searches over the words instead of the pixels. Level 3 fuses both scores with a user-controlled weight, passes retrieved images directly into the VLM's context at answer time, and measures all three routes against an evaluation set. Because I know this archive intimately, I could catch the machine every time it saw something that was not there. Documenting those moments turned out to be most of the work, and most of the point.</p>
+  </div>
+</section>
+
+<section id="corpus">
+  <div class="wrap">
+    <div class="sec-label">Motivation &amp; corpus</div>
+    <h2>Why my own screenshots</h2>
+    <p>I started on June 24, 2026. Steam told me I had 579 screenshots on my profile, which meant I already owned a corpus that satisfied every requirement of the brief: personal, large enough, and known to me down to the individual image. I remember taking most of these. That memory is the ground truth this whole project leans on.</p>
+    <p>Steam organizes downloaded screenshots into folders named by each game's numeric App ID, so the archive arrived with metadata already attached: <code>ROOT/&lt;appid&gt;/screenshots/&lt;file&gt;</code>. Resolving those IDs to readable game names gave every image a verified label without any model guessing involved. After deduplication the working corpus settled at 470 images across 72 App IDs, from Half-Life 2 (2004) to PEAK (2025).</p>
+    <p>This is above the 50 to 150 image target the brief sets for Levels 1 and 2, and above the 300 ceiling mentioned for Level 3. I kept the full set deliberately. Captioning cost was already paid and cached, and a larger corpus gives the retrieval comparison and the evaluation more distractors to trip over, which is where the findings live. The genre skew is real and acknowledged: this archive leans heavily toward shooters and military sims, because that is apparently who I was between 2010 and 2016.</p>
+    <!-- Optional: export the images-per-game bar printout or a folder screenshot as images/corpus.png -->
+    <figure>
+      <img src="images/corpus.png" alt="Folder listing of the Steam screenshot archive organized by App ID">
+      <figcaption><b>The archive as it arrived.</b> Every folder name is a Steam App ID, and every App ID resolves to a game. The folder structure is the one label source in this project that never hallucinates.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-label">Approach</div>
+    <h2>How the machine sees, three ways</h2>
+
+    <div class="pipeline">
+      <svg viewBox="0 0 840 430" role="img" aria-label="Pipeline diagram of the three retrieval routes">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#8fa0b3"/>
+          </marker>
+        </defs>
+        <style>
+          .box { fill: #232f3f; stroke: #334153; rx: 6; }
+          .box-a { fill: #1c2f42; stroke: #6fb7e8; }
+          .lbl { font: 500 13px "Space Grotesk", sans-serif; fill: #dde5ee; }
+          .sub { font: 400 10.5px "IBM Plex Mono", monospace; fill: #8fa0b3; }
+          .flow { stroke: #8fa0b3; stroke-width: 1.4; fill: none; marker-end: url(#arr); }
+          .tag { font: 500 10.5px "IBM Plex Mono", monospace; fill: #e8c15a; }
+        </style>
+        <rect class="box" x="20" y="175" width="150" height="70" rx="6"/>
+        <text class="lbl" x="40" y="203">Steam archive</text>
+        <text class="sub" x="40" y="222">470 imgs / 72 games</text>
+
+        <rect class="box" x="240" y="60" width="180" height="64" rx="6"/>
+        <text class="lbl" x="258" y="87">CLIP ViT-B/32</text>
+        <text class="sub" x="258" y="106">image embeddings</text>
+
+        <rect class="box" x="240" y="185" width="180" height="64" rx="6"/>
+        <text class="lbl" x="258" y="212">Gemma 3 4B</text>
+        <text class="sub" x="258" y="231">JSON caption per image</text>
+
+        <rect class="box" x="240" y="310" width="180" height="64" rx="6"/>
+        <text class="lbl" x="258" y="337">App ID mapping</text>
+        <text class="sub" x="258" y="356">ground-truth game names</text>
+
+        <rect class="box" x="480" y="185" width="180" height="64" rx="6"/>
+        <text class="lbl" x="498" y="212">MiniLM-L6-v2</text>
+        <text class="sub" x="498" y="231">caption embeddings</text>
+
+        <rect class="box box-a" x="620" y="60" width="196" height="88" rx="6"/>
+        <text class="lbl" x="638" y="88">Hybrid fusion</text>
+        <text class="sub" x="638" y="107">&#945;&middot;clip + (1&#8722;&#945;)&middot;caption</text>
+        <text class="tag" x="638" y="126">Level 3</text>
+
+        <rect class="box box-a" x="620" y="300" width="196" height="88" rx="6"/>
+        <text class="lbl" x="638" y="328">Grounded answers</text>
+        <text class="sub" x="638" y="347">captions or raw images</text>
+        <text class="tag" x="638" y="366">Levels 2 + 3</text>
+
+        <path class="flow" d="M170 195 C 205 160, 205 110, 240 96"/>
+        <path class="flow" d="M170 212 L 240 214"/>
+        <path class="flow" d="M170 230 C 205 265, 205 320, 240 340"/>
+        <path class="flow" d="M420 214 L 480 214"/>
+        <path class="flow" d="M420 92 L 620 96"/>
+        <path class="flow" d="M660 214 C 690 200, 690 170, 700 148"/>
+        <path class="flow" d="M660 230 C 690 250, 690 280, 700 300"/>
+        <path class="flow" d="M420 336 C 500 350, 560 348, 620 344"/>
+      </svg>
+    </div>
+
+    <h3>Level 1: search by looks</h3>
+    <p>OpenCLIP ViT-B/32 embeds every image once into a joint image-text space. A text query lands in the same space and cosine similarity ranks the corpus. "Pull up all screenshots from X" bypasses the embeddings entirely and filters on the App ID metadata, because the folder structure already guarantees that answer and there is no reason to make a model guess at something I know. Uploading an unsorted screenshot runs it through the same space for a nearest-neighbor identification with a confidence score.</p>
+
+    <h3>Level 2: search by description</h3>
+    <p>Gemma 3 4B, quantized to 4-bit for the free Colab T4, wrote one structured JSON description per screenshot. Designing that schema was the core decision of the level. Two fields carry most of the weight. <code>visible_elements</code> is an explicit list of objects in frame, which exists because a whole-image CLIP embedding dilutes small details into the average of the scene: a fish in the corner of a room becomes "indoor scene" and is unfindable. A word in a list stays findable. <code>guessed_genre_or_title</code> is the model's own blind guess at what game it is looking at. The captioner is never told the real game name, so comparing its guesses against the App ID ground truth generates mis-seeing evidence automatically, for all 470 images, without me inventing a single test case.</p>
+    <p>Captions embed with a dedicated sentence-transformer (all-MiniLM-L6-v2) and retrieval runs over those vectors. At answer time the retrieved captions go back into Gemma as text context and it answers from them.</p>
+
+    <h3>Level 3: fusion, real eyes, and a grade</h3>
+    <p>Three additions. First, hybrid retrieval fuses both similarity scores into one ranking with a slider for the weight &#945;, where 1 is pure CLIP and 0 is pure captions. The scores had to be min-max normalized per query before fusing, because CLIP cosines on this corpus cluster around 0.2 to 0.3 while MiniLM similarities range up to 0.6, and raw fusion lets the caption route quietly win at every slider position. Second, multimodal answering passes the retrieved images themselves into Gemma's context, capped at three because each image costs the model roughly 256 tokens and small VLMs degrade as the count rises. Third, an evaluation layer measures precision@5 for all three routes against queries with known answers.</p>
+    <p>Everything expensive is cached to the repository: CLIP embeddings, the caption JSON, caption embeddings, and the App ID mapping. A fresh runtime executes the whole notebook without recomputing any of it, which also means grading requires no GPU hours. The captioning cell checks the cache and skips itself.</p>
+  </div>
+</section>
+
+<section id="atlas">
+  <div class="wrap">
+    <div class="sec-label">Results</div>
+    <h2>Retrieval atlas</h2>
+    <p>A tour of queries where the routes behave differently, because those are the ones worth explaining. Full documented set in the notebook's comparison section.</p>
+
+    <!-- Export interface screenshots into images/ with these names -->
+    <figure>
+      <img src="images/atlas_cyberpunk.png" alt="Query cyberpunk: CLIP side shows four Cyberpunk 2077 screenshots, caption side shows none">
+      <figcaption><b>"cyberpunk".</b> CLIP nails four actual Cyberpunk 2077 shots from visual style alone, because it has seen this game all over its web-scale training data. The caption route cannot match the title at all: the captioner was deliberately never told game names, so the word Cyberpunk barely exists in its descriptions. Same corpus, opposite blind spots.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/atlas_swordfighting.png" alt="Query SWORDFIGHTING: caption route surfaces lightsaber duels from Jedi Academy">
+      <figcaption><b>"SWORDFIGHTING".</b> The caption route's best moment. It surfaces Jedi Academy lightsaber duels and a Skyrim melee fight because the captions literally describe figures fighting with blades. CLIP's side returns generic combat chaos. When the thing you want was written down, words beat looks.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/atlas_fishes.png" alt="Query FISHES: both routes return water scenes, grounded answer explains the connection">
+      <figcaption><b>"FISHES".</b> There are no dedicated fish screenshots in this archive, and the system says so, then does the useful thing anyway: both routes surface lakes, underwater scenes and shorelines, and the grounded answer explains why water is the closest it can offer. Designed behavior, after an earlier version just shrugged.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/atlas_mug.png" alt="Reverse identification: a photo of a Diamond Dogs mug identified as Metal Gear Solid V">
+      <figcaption><b>Reverse identification, stress-tested.</b> I uploaded a photo of a coffee mug with the Diamond Dogs logo on it. Not a screenshot, a mug. The system identified it as Metal Gear Solid V: The Phantom Pain with similarity 1.00, because a near-identical mug appears in one of my archived screenshots. Right answer, and a small reminder that nearest-neighbor search matches whatever is nearest, including merchandise.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/atlas_hybrid_slider.png" alt="Hybrid retrieval at alpha 0.5 with per-image score breakdown in captions">
+      <figcaption><b>The fusion slider at work.</b> Hybrid results for "cyberpunk" at &#945;=0.5, with each thumbnail captioned by its fused score and both component scores. Dragging &#945; toward 1 makes the ranking converge on CLIP's visual picks, toward 0 on the caption picks. The per-image breakdown makes the weighting legible instead of magical.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="dossier">
+  <div class="wrap">
+    <div class="sec-label">Results</div>
+    <h2>Mis-seeing dossier</h2>
+    <p>Every case below is a documented failure with a mechanism, in chronological order of discovery. The raw evidence files live in the repository (<code>misseeing_truncation_failures.json</code>).</p>
+
+    <div class="case">
+      <div class="case-id">Case 01 &middot; 324 of 470 captions &middot; 01.07.2026</div>
+      <h3>The token budget massacre</h3>
+      <p>My first optimization pass cut the caption generation budget from 300 tokens to 150 to speed up a four-hour captioning run. Overnight, 69% of all captions came back as invalid JSON. Every single failure was the same shape: the model wrote a good description, ran out of budget mid-sentence, and never reached the closing brace.</p>
+      <div class="evidence"><span class="dim">tail of a failed caption:</span>
+...open landscape under a clear blue sky.",
+  "visible_text": "",
+  "guessed_genre_or_title": "skybound explorers",
+  "confidence_notes": "The figures appear to be observing a distant area, possib<span class="bad">&#9608; [cut]</span></div>
+      <p>Mechanism: generation quality was never the problem, budget arithmetic was. The schema plus a verbose description simply needs more than 150 tokens. Restoring the 300-token budget and re-running only the failed images fixed 318 of the 324. Lesson logged: speed optimizations that touch output length need a validity check before an overnight run, and per-image caching meant the disaster cost one night instead of the whole corpus.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-id">Case 02 &middot; 6 of 470 captions &middot; 06.07.2026</div>
+      <h3>The screenshots that talk too much</h3>
+      <p>Six images kept failing even at 300 tokens. All six contain enormous amounts of on-screen text: multiplayer scoreboards, Space Engineers HUD readouts with thruster and reactor stats. My schema said <code>visible_text</code> should be transcribed "verbatim if legible", and the model obeyed to the point of self-destruction, faithfully typing out sixteen identical player health entries until the budget died.</p>
+      <div class="evidence"><span class="dim">the model, transcribing a scoreboard:</span>
+...player9.health 100, player10.health 100, player11.health 100,
+player12.health 100, player13.health 100, player14.health 100,
+player15.health 100,<span class="bad">&#9608; [cut]</span></div>
+      <p>Mechanism: an unbounded instruction meets a bounded budget. The prompt itself created this failure mode. Rewriting the field to ask for a short summary, twenty words maximum, fixed five of the six. This is my favorite class of failure in the project because the machine did exactly what I asked, and what I asked was impossible.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-id">Case 03 &middot; 1 of 470 captions &middot; 06.07.2026</div>
+      <h3>The curly quote betrayal</h3>
+      <p>One caption survived every fix. A 2012 Garry's Mod screenshot produced a complete, accurate, well-structured description that no parser would accept. Halfway through its element list, the model silently switched from straight quotes to typographic curly quotes.</p>
+      <div class="evidence">"visible_elements": [
+    "silhouette figure",
+    "shotgun",
+    <span class="bad">&#8220;machine gun&#8221;,</span>
+    <span class="bad">&#8220;brick pavement&#8221;,</span>
+    ...</div>
+      <p>Mechanism: the model's training data is full of prose where curly quotes are correct punctuation, and mid-generation it drifted into that register. To a human reader the output is flawless JSON. To <code>json.loads</code> it is garbage. A one-line normalization before parsing fixed it, and the case earns its card because it is a different species of failure entirely: not running out of room, but producing output that looks right and is wrong at the character level.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-id">Case 04 &middot; whole retrieval route &middot; 07.07.2026</div>
+      <h3>Hub collapse, or the screenshot that matched everything</h3>
+      <p>With captioning finally clean, Level 2 retrieval turned out to be quietly broken. The same handful of screenshots surfaced for every query. A Terraria fireworks shot scored 0.39 to 0.45 for "GRENADE", "FISHES", "LOSING" and "MONEY", four queries with nothing in common. A "YOU WIN" screen and two Metal Gear post-mission reports appeared in nearly every result set.</p>
+      <p>Mechanism, in two parts. I had reused CLIP's text encoder to embed the captions, for the appealing reason of keeping one model stack. But CLIP's text encoder truncates at 77 tokens, and my flattened captions routinely exceed that, so their tails got chopped and what survived was partly shared boilerplate. And CLIP's text space was trained to align text with images, never text with text, so its geometry crowds many caption vectors near the center where they sit a little close to every query. A few captions became hubs that matched everything.</p>
+      <p>The fix was swapping in a purpose-built sentence embedding model (all-MiniLM-L6-v2) for the caption side, a contained one-cell change. The hubs vanished immediately: "MONEY" started returning the GTA V cash HUD, "SWORDFIGHTING" kept its lightsabers, and the Terraria fireworks finally stopped attending every party.</p>
+      <div class="fig-row">
+        <!-- export a "before" interface shot (e.g. MONEY with the YOU WIN hub) and an "after" -->
+        <figure>
+          <img src="images/hub_before.png" alt="Before: query MONEY returns the same hub screenshots as unrelated queries">
+          <figcaption><b>Before.</b> "MONEY" answered by the same hub screenshots as four other queries.</figcaption>
+        </figure>
+        <figure>
+          <img src="images/hub_after.png" alt="After: query MONEY returns a GTA V cash HUD screenshot">
+          <figcaption><b>After.</b> Same query through the sentence-embedding route.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="case ok">
+      <div class="case-id">Case 05 &middot; by design &middot; ongoing</div>
+      <h3>The captioner does not know what game it is playing</h3>
+      <p>This one is a failure I built on purpose. Because the captioner is never told the real game name, its blind guesses in <code>guessed_genre_or_title</code> can be compared against the App ID ground truth across the whole corpus. The guesses are a portrait of how a small VLM sees games: Cyberpunk 2077 becomes "Cyberpunk Metropolis", Space Engineers becomes "skybound explorers", and nearly everything with a gun becomes "military shooter". The route-level consequence shows up in the atlas: caption retrieval is structurally incapable of answering title queries, and that is a property of my schema decision, not of the model.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-id">Case 06 &middot; multimodal degradation &middot; 08.07.2026</div>
+      <h3>More eyes, worse sight</h3>
+      <p>The brief warns that small VLMs degrade with multiple images in context, and asks for that degradation to be documented rather than hidden. I ran the same question ("what weapons are visible?") through the multimodal answering mode with one, two, three and four retrieved images in context.</p>
+      <!-- Run the degradation probe cell, screenshot the output, save as images/degradation.png,
+           and replace the placeholder sentence below with what you actually observed. -->
+      <figure>
+        <img src="images/degradation.png" alt="Degradation probe output: the same question answered from 1, 2, 3 and 4 images">
+        <figcaption><b>The degradation probe.</b> Same question, growing image count. [Replace with one sentence on what you observed: where answers got vaguer, which details were dropped or conflated between images.]</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="evaluation">
+  <div class="wrap">
+    <div class="sec-label">Results</div>
+    <h2>Evaluation report</h2>
+    <p>Two benchmarks, both measuring precision@5: of each route's top five results, how many are actually correct. The routes are CLIP-only (Level 1), caption-only (Level 2), and hybrid fusion at &#945;=0.5 (Level 3).</p>
+
+    <h3>Benchmark 1: game identity, labeled by the folder structure</h3>
+    <p>Queries are game names, and the correct answers are by definition the files inside that game's own App ID folder. Neither retrieval route ever saw those labels, so this is a fair fight, and it is one where I could predict the outcome in advance: the caption route should lose badly, because game titles were deliberately withheld from the captioner, while CLIP has seen most of these games captioned all over the web.</p>
+    <!-- Run the game-identity eval cell and paste the real means here.
+         evaluation_gameid.csv has the per-query table if you want to include highlights. -->
+    <table>
+      <thead><tr><th>Route</th><th>Mean p@5</th><th>Predicted</th></tr></thead>
+      <tbody>
+        <tr><td>Level 1 (CLIP)</td><td class="num">0.57</td><td>high</td></tr>
+        <tr><td>Level 2 (captions)</td><td class="num">0.12</td><td>low, by design</td></tr>
+        <tr><td>Level 3 (hybrid, &#945;=0.5)</td><td class="num">0.42</td><td>between the two</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Benchmark 2: semantic queries, pooled judgment</h3>
+    <p>Ten semantic queries ("a dog or wolf", "snowy landscape", "an inventory menu", and deliberately, "a fish"). For each query I judged the pooled union of all three routes' top five results, marking which retrieved images were actually relevant. This is standard pooling from information retrieval: it measures precision honestly while only requiring me to judge what was retrieved, around fifteen images per query, rather than hand-labeling 470.</p>
+    <!-- Run the pooled eval cells, fill in JUDGMENTS, and paste the means here.
+         evaluation_pooled.csv has the per-query breakdown. -->
+    <table>
+      <thead><tr><th>Route</th><th>Mean p@5</th></tr></thead>
+      <tbody>
+        <tr><td>Level 1 (CLIP)</td><td class="num">0.44</td></tr>
+        <tr><td>Level 2 (captions)</td><td class="num">0.39</td></tr>
+        <tr><td>Level 3 (hybrid, &#945;=0.5)</td><td class="num">0.44</td></tr>
+      </tbody>
+    </table>
+    <p>The averages tie, and the averages are the least interesting number on this page. The routes succeed on different species of query. CLIP alone found "a medieval knight", "snowy landscape", "golden hour" and "a scoreboard": atmosphere, lighting, visual texture, things nobody writes down. The caption route alone found "a sports car", "a dog" and "a management menu": nameable things that survive being turned into words. The hybrid at a fixed 0.5 matched CLIP's hit rate without beating it, inheriting wins from both parents but also diluting some of each parent's strongest signals. Which is the honest argument for the slider: there is no single correct weighting, only a correct weighting per query. Both zero-gold probes ("a fish", "nudity") behaved exactly as predicted and are reported as undefined rather than as zeros.</p>
+    <p>A known limitation of the pooled method, stated plainly: it cannot see relevant images that no route retrieved, so it measures precision and says nothing about recall. An image all three routes missed is invisible to this benchmark.</p>
+  </div>
+</section>
+
+<section id="reflection">
+  <div class="wrap">
+    <div class="sec-label">Reflection</div>
+    <h2>What I actually learned</h2>
+    <p>The brief said documented failure analyzed well is worth more than concealed failure, and this project tested whether I believed that. The captioning run failed at 69% on the first overnight attempt. The retrieval route I was proudest of turned out to have collapsed into a handful of hub images. Both of those nights felt terrible and both produced the best material on this page. Somewhere around Case 04 I stopped experiencing failures as setbacks and started experiencing them as the deliverable, which I suspect was the point of the course.</p>
+    <p>The single decision I would defend hardest is keeping the captioner blind to game names. It cost the caption route any chance at title queries, and it bought me a corpus-wide, automatically generated record of how a small vision model actually interprets game imagery when nobody tells it the answer. That trade is the project in miniature: every route sees something, no route sees everything, and the design work is deciding which blindness you can live with.</p>
+    <p>On process: this project was built in collaboration with AI assistants, mainly Claude for architecture and debugging, with the occasional detour through Gemini that mostly taught me to be suspicious of confident fixes. All of it is documented in my process notes, including the fixes that made things worse before they made things better. The judgment calls, the schema, the corpus, the evaluation labels and every decision about what counts as a failure are mine.</p>
+    <p>What I would build next: the degradation probe suggests the multimodal mode wants a smarter image budget, choosing one sharp image over three redundant ones. And the hub collapse episode makes me want to visualize the embedding spaces directly, because I found that failure by squinting at repeated thumbnails when a two-dimensional projection would have shown it in seconds.</p>
+  </div>
+</section>
+
+<section id="limitations">
+  <div class="wrap">
+    <div class="sec-label">Limitations</div>
+    <h2>What this cannot do</h2>
+    <ul>
+      <li>The caption route knows only what the captioner wrote. Anything Gemma missed, mis-saw or summarized away in that one pass is permanently invisible to caption search. One caption per image, generated once, is a hard ceiling on that route.</li>
+      <li>The corpus skews heavily toward shooters and military sims. Retrieval quality on queries outside that genre space is untested territory, and the evaluation inherits the same skew.</li>
+      <li>Live grounded answers require a GPU to host Gemma. On a CPU runtime both retrieval routes still work from cache, and only the generated prose is unavailable.</li>
+      <li>The pooled evaluation measures precision only. Recall is unmeasured, and an image every route missed does not exist as far as the benchmark is concerned.</li>
+      <li>One caption of 470 remains unparsed after all fixes, kept deliberately as a specimen. Its raw text still participates in search through a fallback path.</li>
+      <li>The public repository carries a curated sample of the archive rather than all 470 images, since the screenshots depict commercial games. The full set exists locally and a representative sample plus this description satisfies the submission requirements. The repository comes down after grading.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-label">Sources &amp; references</div>
+    <h2>Standing on shoulders</h2>
+    <ul>
+      <li>Radford et al., <i>Learning Transferable Visual Models From Natural Language Supervision</i> (CLIP), 2021. Model via <a href="https://github.com/mlfoundations/open_clip">OpenCLIP</a>, ViT-B/32, laion2b weights.</li>
+      <li>Gemma Team, Google DeepMind, <i>Gemma 3 Technical Report</i>, 2025. Model: <a href="https://huggingface.co/google/gemma-3-4b-it">gemma-3-4b-it</a>, 4-bit quantized via bitsandbytes.</li>
+      <li>Reimers &amp; Gurevych, <i>Sentence-BERT</i>, 2019. Model: <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> via sentence-transformers.</li>
+      <li>Valve, Steam storefront API (<code>appdetails</code>), used once during development to resolve App IDs, then cached.</li>
+      <li>Gradio, HuggingFace Transformers, PyTorch, NumPy, pandas.</li>
+      <li>Page format modeled on <a href="https://dreambooth.github.io">dreambooth.github.io</a> and the LatentWorld student documentation from this program.</li>
+      <li>Course: CompSci for Designers 2, Moritz Schwind &amp; Christopher Kopic, TH Nürnberg, Fakultät Design.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Seeing Machines &middot; Screenshot Companion &middot; submitted 09.07.2026 &middot; built with an archive, a small model, and a growing tolerance for being wrong.
+  </div>
+</footer>
+
+</body>
+</html>

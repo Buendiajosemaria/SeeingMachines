@@ -12,6 +12,8 @@ TH Nürnberg, Summer 2026. Submitted at **Level 3 (The Critic)**.
 
 **Netlify Mirror** https://seeingmachines.netlify.app/
 
+**Google Drive to the Notebook** https://drive.google.com/file/d/1Os8bx9-f1QO8Q7Hqx4jLLS2RpIgDR15q/view?usp=drive_link
+
 ## What it does
 
 Three retrieval routes run over the same corpus:

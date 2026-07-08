@@ -8,7 +8,7 @@ or "what game is this from?".
 Final project for **CompSci for Designers 2**, MA Design for Digital Futures,
 TH Nürnberg, Summer 2026. Submitted at **Level 3 (The Critic)**.
 
-**Full documentation:** https://buendiajosemaria.github.io/SeeingMachines/
+**Full documentation:** https://github.com/Buendiajosemaria/SeeingMachines/tree/main
 
 ## What it does
 
